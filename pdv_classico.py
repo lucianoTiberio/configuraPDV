@@ -35,5 +35,5 @@ class PdvClassico():
         time.sleep(2)
         os.system('cls')
         print('Todas as configurações foram realizadas\nA maquina ira reiniciar e estara pronta para o envio')
-        time.sleep(20)
         configuraSSH.reboot()
+        os.system('pause')

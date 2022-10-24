@@ -34,6 +34,5 @@ class PdvTouch():
         time.sleep(2)
         os.system('cls')
         print('Todas as configurações foram realizadas\nA maquina ira reiniciar e estara pronta para o envio\n')
-        time.sleep(10)
-
         configuraSSH.reboot()
+        os.system('pause')
