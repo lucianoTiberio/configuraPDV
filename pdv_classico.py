@@ -34,6 +34,6 @@ class PdvClassico():
         configuraSSH.dnsMaquina()
         sleep(2)
         system('cls')
-        print('Todas as configurações foram realizadas\nA maquina ira reiniciar e estara pronta para o envio')
+        print('Todas as configurações foram realizadas\nA maquina ira reiniciar e estara pronta para o envio\n')
         configuraSSH.reboot()
         system('pause')

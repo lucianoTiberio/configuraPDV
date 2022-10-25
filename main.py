@@ -24,7 +24,7 @@ def informacoes():
 
 
     confirmacao = str(input(f'A imagem sera configurada com as seguintes informações\n\n'
-                            f'Loja {loja}\nPDV {pdv}\nIP {ippdv}\nconfirma as informações ?\n\n'
+                            f'Loja {loja}\nPDV {pdv}\nIP {ippdv}\n\nConfirma as informações ?\n\n'
                             f's - SIM\nn - Não\n'))
 
     #Esse parametro foi colocado para que o usuario valide as inforções preenchidas para que não ocorra erros
