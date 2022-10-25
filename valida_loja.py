@@ -2,7 +2,7 @@ from pdv_touch import PdvTouch
 from pdv_classico import PdvClassico
 from os import system
 from conecta_pdv import ConexaoDB
-
+#A classe ValidaLoja é responsavel pela verificação se a loja usa pdv touch ou nao, e inicia o processo de cofiguração conforme resposta do IF
 class ValidaLoja():
     def __init__(self,ip, loja, pdv, ippdv):
         self.ip = ip
