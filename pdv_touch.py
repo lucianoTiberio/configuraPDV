@@ -1,8 +1,8 @@
-import dump_ssh
-import querys
-import scripts_ssh
-import time
-import os
+from dump_ssh import DumpSSH
+from querys import ConfiguraMysql
+from scripts_ssh import Scripts
+from time import sleep
+from os import system
 
 class PdvTouch():
     def __init__(self,ip, loja, pdv, ippdv):
@@ -12,17 +12,17 @@ class PdvTouch():
         self.ippdv = ippdv
 
     def execucao(self):
-        print('Configurando......')
+        print('Configurando......\nO processo leva em media 1 minuto')
         #executa o dump de um PDV da loja solicitada para imagem que esta sendo preparada
-        dumpInfLoja = dump_ssh.DumpSSH(self.ip, self.loja)
+        dumpInfLoja = DumpSSH(self.ip, self.loja)
         dumpInfLoja.mysqldump()
-        time.sleep(40)
+        sleep(40)
         #Configura qual sera o concetrador da loja e o seu Jboss
-        configuraSSH = scripts_ssh.Scripts(self.ip,self.loja, self.ippdv)
+        configuraSSH = Scripts(self.ip,self.loja, self.ippdv)
         configuraSSH.concetrador()
         configuraSSH.jboss()
         #Realiza da conguração dos paremetros da loja e pdv nas tabelas do banco
-        configuraMysql = querys.ConfiguraMysql(self.ip, self.loja, self.pdv, self.ippdv)
+        configuraMysql = ConfiguraMysql(self.ip, self.loja, self.pdv, self.ippdv)
         configuraMysql.controle()
         configuraMysql.pdvParametros()
         configuraMysql.tefParametros()
@@ -31,8 +31,8 @@ class PdvTouch():
         configuraSSH.ipNetmanager()
         configuraSSH.gwNetmanager()
         configuraSSH.dnsNetmanager()
-        time.sleep(2)
-        os.system('cls')
+        sleep(2)
+        system('cls')
         print('Todas as configurações foram realizadas\nA maquina ira reiniciar e estara pronta para o envio\n')
         configuraSSH.reboot()
-        os.system('pause')
+        system('pause')

@@ -3,7 +3,7 @@ import conecta_pdv
 
 class ConfiguraMysql():
     def __init__(self, ip, loja, pdv, ippdv):
-        self.conexao = conecta_pdv.ConexaoDB(ip)
+        self.conexao = conecta_pdv.ConexaoDB(ip,'PDV')
         self.loja = loja
         self.pdv = pdv
         self.ippdv = ippdv

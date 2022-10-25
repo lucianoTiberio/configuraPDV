@@ -2,11 +2,11 @@ import mysql.connector
 
 # Classe responsavel por realizar a conexão com banco MYSQL
 class ConexaoDB():
-    def __init__(self, ip):
+    def __init__(self, ip, db):
         self.host = ip
         self.user = "root"
         self.pwd = ""
-        self.db = "PDV"
+        self.db = db
 
 
     def conecta(self):
@@ -36,5 +36,3 @@ class ConexaoDB():
         self.cur.execute(sql)
         self.con.commit()
         self.desconecta()
-
-

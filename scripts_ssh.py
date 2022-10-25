@@ -1,4 +1,4 @@
-import conecta_ssh
+from conecta_ssh import ConectaSSH
 #Classe responsavel por todos alterações e comando no LINUX
 class Scripts():
 
@@ -6,7 +6,7 @@ class Scripts():
         self.ip = ip
         self.loja = loja
         self.ippdv = ippdv
-        self.conexao = conecta_ssh.ConectaSSH(self.ip)
+        self.conexao = ConectaSSH(self.ip)
 
     def concetrador(self):
         self.conexao.conectaSSH()

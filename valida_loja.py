@@ -1,7 +1,7 @@
-import pdv_touch
-import pdv_classico
-import time
-import os
+from pdv_touch import PdvTouch
+from pdv_classico import PdvClassico
+from os import system
+from conecta_pdv import ConexaoDB
 
 class ValidaLoja():
     def __init__(self,ip, loja, pdv, ippdv):
@@ -9,19 +9,24 @@ class ValidaLoja():
         self.loja = loja
         self.pdv = pdv
         self.ippdv = ippdv
-        self.lpdvclassico = [2, 3, 4, 5, 6, 7, 9, 10, 11, 12, 16, 17, 19, 20, 21, 22]
-        self.lpdvtouch = [18, 23]
-        self.pdvClassico = pdv_classico.PdvClassico(self.ip, self.loja, self.pdv, self.ippdv)
-        self.pdvTouch = pdv_touch.PdvTouch(self.ip, self.loja, self.pdv, self.ippdv)
+        self.pdvClassico = PdvClassico(self.ip, self.loja, self.pdv, self.ippdv)
+        self.pdvTouch = PdvTouch(self.ip, self.loja, self.pdv, self.ippdv)
+        self.conexao = ConexaoDB('10.95.7.28','statuspdv')
+
 
     def direcionamento(self):
-        if int(self.loja) in self.lpdvclassico:
+        self.conexao.conecta()
+        self.lpdvclassico = str(self.conexao.executa_DQL("SELECT loja FROM tipo_pdv WHERE touch = 'N'"))
+        self.lpdvtouch = str(self.conexao.executa_DQL("SELECT loja FROM tipo_pdv WHERE touch = 'S'"))
+
+
+        if str(self.loja) in self.lpdvclassico:
             self.pdvClassico.execucao()
-        elif int(self.loja) in self.lpdvtouch:
+        elif str(self.loja) in self.lpdvtouch:
             self.pdvTouch.execucao()
         else:
             print(f"\nA Loja {self.loja} informada não consta no sistema !\n"
                   "Se for uma loja nova solicite o cadastramento ao desenvolvedor\n"
                   "\nrevise as informações e tente novamente.\n\n")
-            os.system('pause')
+            system('pause')
 
