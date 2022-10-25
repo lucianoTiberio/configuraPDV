@@ -1,5 +1,6 @@
 #Biblioteca para conexao SSH via Python
 from paramiko import SSHClient,AutoAddPolicy
+from os import system
 
 #Classe responsavel conexao SSH
 class ConectaSSH():
@@ -14,7 +15,9 @@ class ConectaSSH():
         try:
             self.ssh.set_missing_host_key_policy(AutoAddPolicy())
             self.ssh.connect(hostname=self.ip, username=self.login, password=self.senha)
-        except: print(f'Erro ao tentar conectar ao IP {self.ip} informado via SSH')
+        except:
+            print(f'Erro ao tentar conectar ao IP {self.ip} informado via SSH\n Verifique se o IP da imagem esta correto')
+            system('pause')
 
     #Executa o comando informado
     def executaSSH(self,comando):
