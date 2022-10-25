@@ -27,7 +27,7 @@ def informacoes():
                             f'Loja {loja}\nPDV {pdv}\nIP {ippdv}\nconfirma as informações ?\n\n'
                             f's - SIM\nn - Não\n'))
 
-    if str(confirmacao) == 's' or str(confirmacao) == 'S' or str(confirmacao) =='SIM' or str(confirmacao) =='sim':
+    if str.upper(confirmacao) == 'S' or str.upper(confirmacao) =='SIM' :
         validacao = ValidaLoja(ip, loja, pdv, ippdv)
         validacao.direcionamento()
     else:
