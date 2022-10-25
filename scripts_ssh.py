@@ -58,3 +58,8 @@ class Scripts():
         self.conexao.conectaSSH()
         self.comando = f"sed -i 's/,10.95.6.254/,192.168.{self.loja}.254/' /etc/NetworkManager/system-connections/'Conexão com cabo.nmconnection'"
         self.conexao.executaSSH(self.comando)
+
+    def persistent(self):
+        self.conexao.conectaSSH()
+        self.comando = f"rm -rf /etc/udev/rules.d/70-persistent-net.rules"
+        self.conexao.executaSSH(self.comando)

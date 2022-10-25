@@ -32,6 +32,7 @@ class PdvClassico():
         configuraSSH.ipMaquina()
         configuraSSH.gwMaquina()
         configuraSSH.dnsMaquina()
+        configuraSSH.persistent()
         sleep(2)
         system('cls')
         print('Todas as configurações foram realizadas\nA maquina ira reiniciar e estara pronta para o envio\n')
