@@ -8,6 +8,11 @@ class Scripts():
         self.ippdv = ippdv
         self.conexao = ConectaSSH(self.ip)
 
+        if self.loja == '2':
+            self.loja = '1'
+        else:
+            self.loja = self.loja
+
     def concetrador(self):
         self.conexao.conectaSSH()
         self.comando = f"sed -i 's/192.168.*.100/192.168.{self.loja}.100/' /opt/covabra/prj_PDV/pdv.properties"
@@ -31,12 +36,12 @@ class Scripts():
 
     def gwMaquina(self):
         self.conexao.conectaSSH()
-        self.comando = f"sed -i 's/gateway 10.95.6.254/gateway 192.168.{self.loja}.254/' /etc/network/interfaces"
+        self.comando = f"sed -i 's/gateway *.*.*.*/gateway 192.168.{self.loja}.254/' /etc/network/interfaces"
         self.conexao.executaSSH(self.comando)
 
     def dnsMaquina(self):
         self.conexao.conectaSSH()
-        self.comando = f"sed -i 's/dns-nameservers 10.95.6.254/dns-nameservers 192.168.{self.loja}.254/' /etc/network/interfaces"
+        self.comando = f"sed -i 's/dns-nameservers *.*.*.*/dns-nameservers 192.168.{self.loja}.254/' /etc/network/interfaces"
         self.conexao.executaSSH(self.comando)
 
     def reboot(self):
@@ -51,12 +56,12 @@ class Scripts():
 
     def dnsNetmanager(self):
         self.conexao.conectaSSH()
-        self.comando = f"sed -i 's/dns=10.95.6.254;/dns=192.168.{self.loja}.254;/' /etc/NetworkManager/system-connections/'Conexão com cabo.nmconnection'"
+        self.comando = f"sed -i 's/dns=*.*.*.*;/dns=192.168.{self.loja}.254;/' /etc/NetworkManager/system-connections/'Conexão com cabo.nmconnection'"
         self.conexao.executaSSH(self.comando)
 
     def gwNetmanager(self):
         self.conexao.conectaSSH()
-        self.comando = f"sed -i 's/,10.95.6.254/,192.168.{self.loja}.254/' /etc/NetworkManager/system-connections/'Conexão com cabo.nmconnection'"
+        self.comando = f"sed -i 's/24,*.*.*.*/24,192.168.{self.loja}.254/' /etc/NetworkManager/system-connections/'Conexão com cabo.nmconnection'"
         self.conexao.executaSSH(self.comando)
 
     def persistent(self):
